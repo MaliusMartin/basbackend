@@ -12,7 +12,7 @@ Follow these steps to get the project up and running:
 Clone the project repository from GitHub using the following command:
 
 ```bash
-git clone https://github.com/your-username/biometric-attendance-system.git
+git clone https://github.com/MaliusMartin/biometric-attendance-system.git
 ```
 
 ### 2. Create a Virtual Environment
