@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from ImperialEmployeesApp.models import Employee, AttendanceRecord, DeductionReason,SalaryDeduction,DeductionConfirmation,Overtime,OvertimeConfirmation, AdminUser,Departments
+from ImperialEmployeesApp.models import Employee, AttendanceRecord, DeductionReason,SalaryDeduction,DeductionConfirmation,Overtime,OvertimeConfirmation, AdminUser,Departments, Positions
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('employee_id','first_name','middle_name','sur_name','mobile_number','position','salary',
+        fields = ('first_name','middle_name','sur_name','mobile_number','email','department','position','salary',
                   'reporting_time','leaving_time','front_image','right_image','left_image','fingerprint')
 
 
@@ -47,6 +47,13 @@ class OvertimeConfirmationSerializer(serializers.ModelSerializer):
 class DepartmentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Departments
-        fields = ('department','position')
+        fields = ('department',)
+
+        
+
+class PositionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Positions
+        fields = ('position',)
         
             

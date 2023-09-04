@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from  ImperialEmployeesApp.models import Employee, AttendanceRecord,DeductionConfirmation,SalaryDeduction,AdminUser,DeductionReason,Overtime,OvertimeConfirmation,Departments 
-from ImperialEmployeesApp.serializers import EmployeeSerializer,AdminUserSerializer,AttendanceRecordSerializer,DeductionConfirmationSerializer,SalaryDeductionSerializer,AdminUserSerializer,DeductionReasonSerializer,OvertimeSerializer,OvertimeConfirmationSerializer,DepartmentsSerializer
+from  ImperialEmployeesApp.models import Employee, AttendanceRecord,DeductionConfirmation,SalaryDeduction,AdminUser,DeductionReason,Overtime,OvertimeConfirmation,Departments,Positions 
+from ImperialEmployeesApp.serializers import EmployeeSerializer,AdminUserSerializer,AttendanceRecordSerializer,DeductionConfirmationSerializer,SalaryDeductionSerializer,AdminUserSerializer,DeductionReasonSerializer,OvertimeSerializer,OvertimeConfirmationSerializer,DepartmentsSerializer,PositionsSerializer
 
 
 
@@ -248,4 +248,31 @@ def departments_api(request, id=0):
     elif request.method == "DELETE":
         department = Departments.objects.get(id=id)
         department.delete()
+        return JsonResponse("Delete Successful", safe=False)
+
+
+@csrf_exempt
+def positions_api(request, id=0):
+    if request.method == "GET":
+        position = Positions.objects.all()
+        positions_serializer = PositionsSerializer(position, many=True)
+        return JsonResponse(positions_serializer.data, safe=False)
+    elif request.method == "POST":
+        position_data = JSONParser().parse(request)
+        positions_serializer = PositionsSerializer(data=position_data)
+        if positions_serializer.is_valid():
+            positions_serializer.save()
+            return JsonResponse("Added Successfully", safe=False)
+        return JsonResponse("Failed to add", safe=False) 
+    elif request.method == "PUT":
+        position_data = JSONParser().parse(request)
+        position = Positions.objects.get(id=position_data['id'])
+        positions_serializer = PositionsSerializer(position, data=position_data)
+        if positions_serializer.is_valid():
+            positions_serializer.save()
+            return JsonResponse("Update Successfully", safe=False)
+        return JsonResponse("Failed to Update")
+    elif request.method == "DELETE":
+        position = Positions.objects.get(id=id)
+        position.delete()
         return JsonResponse("Delete Successful", safe=False)

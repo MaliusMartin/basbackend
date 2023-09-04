@@ -1,30 +1,32 @@
 # from django.db import models
 from django.db import models
 # Create your models here.
-
-
 class Departments(models.Model):
-    department = models.CharField(max_length=50)
-    position = models.CharField(max_length=50, null=True, blank=True)
+    department = models.CharField(max_length=50, null=True)
+    
+class Positions(models.Model):
+    position = models.CharField(max_length=50, null=True)
 
-class Position(models.Model):
-    title = models.CharField(max_length=50)
 
 class Employee(models.Model):
-    employee_id = models.CharField(max_length=20, unique=True)
+    # employee_id = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50)
     sur_name = models.CharField(max_length=50)
     mobile_number = models.CharField(max_length=15)
-    departments = models.ForeignKey(Departments, on_delete=models.CASCADE, null=True)
-    positions = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
+    email = models.EmailField(max_length=100, null=True)
+    department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True)
+    position = models.ForeignKey(Positions, on_delete=models.SET_NULL, null=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
-    reporting_time = models.TimeField()
-    leaving_time = models.TimeField()
-    front_image = models.ImageField(upload_to='employee_images/')
-    right_image = models.ImageField(upload_to='employee_images/')
-    left_image = models.ImageField(upload_to='employee_images/')
-    fingerprint = models.BinaryField()
+    reporting_time = models.TimeField(null=True)
+    leaving_time = models.TimeField(null=True)
+    front_image = models.ImageField(upload_to='employee_images/', null=True)
+    right_image = models.ImageField(upload_to='employee_images/', null=True)
+    left_image = models.ImageField(upload_to='employee_images/',null=True)
+    fingerprint = models.BinaryField(null=True)
+    
+    # class Meta:
+    #     ordering = ['employee_id']
 
 
 class AttendanceRecord(models.Model):

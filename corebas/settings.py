@@ -68,7 +68,16 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOWED_ALL = True
+# settings.py
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:3000'
+    # You can add more origins as needed
+]
+
+# Allow credentials (cookies, Authorization header, etc.) to be sent with cross-origin requests
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'corebas.urls'
 
@@ -99,7 +108,7 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'imperialworkers',
+        'NAME': 'imc',
         'USER': 'root',
         'PASSWORD': 'Byabusha@22',
         'HOST': '127.0.0.1',

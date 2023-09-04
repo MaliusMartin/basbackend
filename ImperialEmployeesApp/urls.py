@@ -26,7 +26,10 @@ urlpatterns = [
     path('overtime-confirmation/', views.overtime_confirmation_api),  # Overtime Confirmation API
     path('overtime-confirmation/<int:id>/', views.overtime_confirmation_api),  # Retrieve/Update/Delete specific overtime confirmation
     
-    path('departments/', views.departments_api),  # Overtime Confirmation API
-    path('departments/<int:id>/', views.departments_api),  # Retrieve/Update/Delete specific overtime confirmation
-    
+    path('departments/', views.departments_api), 
+    path('departments/<int:id>/', views.departments_api), 
+   
+    path('positions/', views.positions_api),  
+    path('positions/<int:id>/', views.positions_api),  
+  
 ]
